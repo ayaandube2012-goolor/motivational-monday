@@ -24,4 +24,20 @@ if day == 0:
                             "Hello,\n"
                             "I know this is probably the day you hate the most so here's some motivation:\n"
                             f"{quote}")
-        print("email sent")
+elif day == 4:
+    with open("deep_thoughts.txt", "r") as quotes:
+        quotes_str = quotes.read()
+        quotes_list = quotes_str.splitlines()
+    quote = random.choice(quotes_list)
+    with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+        connection.starttls()
+        connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+        connection.sendmail(from_addr=MY_EMAIL,
+                            to_addrs="24AyaanDube@lgs.slough.sch.uk",
+                            msg = "Subject: Good morning\n"
+                            f"From: {MY_EMAIL}\n"
+                            "To: 24AyaanDube@lgs.slough.sch.uk\n"
+                            "\n"
+                            "Hello,\n"
+                            "It's finally the end of the week, here is a deep thought to end the week:\n"
+                            f"{quote}")    
